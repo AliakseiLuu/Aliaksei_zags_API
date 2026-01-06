@@ -24,5 +24,8 @@ jobs:
       - name: Set up Gradle
         uses: gradle/actions/setup-gradle@v5
 
+      - name: Make gradlew executable
+        run: chmod +x ./gradlew
+
       - name: Run Checkstyle
         run: ./gradlew checkstyleMain checkstyleTest
