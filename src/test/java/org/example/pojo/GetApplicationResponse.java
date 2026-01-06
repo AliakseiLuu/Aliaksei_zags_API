@@ -1,13 +1,12 @@
 package org.example.pojo;
 
-import lombok.Getter;
-
 import java.util.List;
+import lombok.Getter;
 
 @Getter
 public class GetApplicationResponse {
 
-    private String total;
-    private List<ApplicationData> data;
-    private String requestId;
+  private String total;
+  private List<ApplicationData> data;
+  private String requestId;
 }

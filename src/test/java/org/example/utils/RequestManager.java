@@ -8,19 +8,19 @@ import lombok.experimental.UtilityClass;
 @UtilityClass
 public class RequestManager {
 
-    public <T> T getRequest(RequestSpecification requestSpecification,
-                            ResponseSpecification responseSpecification,
-                            String path, Class <T> tClass){
-        return
-                RestAssured
-                    .given()
-                        .spec(requestSpecification)
-                        .basePath(path)
-                    .when()
-                        .get()
-                    .then()
-                        .spec(responseSpecification)
-                        .extract()
-                            .as(tClass);
-    }
+  public <T> T getRequest(
+      final RequestSpecification requestSpecification,
+      final ResponseSpecification responseSpecification,
+      final String path,
+      final Class<T> tClass) {
+    return RestAssured.given()
+        .spec(requestSpecification)
+        .basePath(path)
+        .when()
+        .get()
+        .then()
+        .spec(responseSpecification)
+        .extract()
+        .as(tClass);
+  }
 }
