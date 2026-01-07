@@ -1,1 +1,8 @@
-rootProject.name = 'Aliaksei_zags_API'
+rootProject.name = "Aliaksei_zags_API"
+
+pluginManagement {
+    repositories {
+        gradlePluginPortal()
+        mavenCentral()
+    }
+}
