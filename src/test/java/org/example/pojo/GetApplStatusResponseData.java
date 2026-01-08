@@ -5,7 +5,7 @@ import lombok.Getter;
 
 @Getter
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class ApplStatusData {
+public class GetApplStatusResponseData {
 
   private String dateofapplication;
   private String kindofapplication;

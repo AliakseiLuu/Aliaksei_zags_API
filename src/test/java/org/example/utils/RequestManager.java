@@ -13,6 +13,7 @@ public class RequestManager {
       final ResponseSpecification responseSpecification,
       final String path,
       final Class<T> tClass) {
+
     return RestAssured.given()
         .spec(requestSpecification)
         .basePath(path)
@@ -23,4 +24,23 @@ public class RequestManager {
         .extract()
         .as(tClass);
   }
+
+    public <T> T postRequest(
+            final RequestSpecification requestSpecification,
+            final ResponseSpecification responseSpecification,
+            final String path,
+            final Object requestBody,
+            final Class<T> tClass) {
+
+        return RestAssured.given()
+                .spec(requestSpecification)
+                .body(requestBody)
+                .basePath(path)
+                .when()
+                .post()
+                .then()
+                .spec(responseSpecification)
+                .extract()
+                .as(tClass);
+    }
 }
