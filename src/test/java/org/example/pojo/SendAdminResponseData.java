@@ -7,5 +7,5 @@ import lombok.Getter;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class SendAdminResponseData {
 
-    private int staffid;
+  private int staffid;
 }

@@ -7,6 +7,6 @@ import lombok.Getter;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class SendAdminResponse {
 
-    private SendAdminResponseData data;
-    private String requestId;
+  private SendAdminResponseData data;
+  private String requestId;
 }

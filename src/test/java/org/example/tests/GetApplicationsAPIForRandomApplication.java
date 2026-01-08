@@ -1,14 +1,19 @@
 package org.example.tests;
 
-import org.example.pojo.GetApplicationsResponseData;
-import org.example.pojo.GetApplicationsResponse;
-import org.example.utils.RequestManager;
-import org.junit.jupiter.api.Test;
+import static org.hamcrest.CoreMatchers.notNullValue;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.emptyOrNullString;
+import static org.hamcrest.Matchers.not;
+import static org.hamcrest.collection.IsEmptyCollection.empty;
+import static org.hamcrest.core.AnyOf.anyOf;
+import static org.hamcrest.core.IsInstanceOf.instanceOf;
+import static org.hamcrest.core.IsNull.nullValue;
 
 import java.util.Random;
-
-import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.*;
+import org.example.pojo.GetApplicationsResponse;
+import org.example.pojo.GetApplicationsResponseData;
+import org.example.utils.RequestManager;
+import org.junit.jupiter.api.Test;
 
 public class GetApplicationsAPIForRandomApplication extends BaseTest {
 
