@@ -1,13 +1,16 @@
 package org.example.tests;
 
-import static org.hamcrest.CoreMatchers.notNullValue;
-import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.emptyOrNullString;
 import static org.hamcrest.Matchers.not;
+import static org.hamcrest.Matchers.notNullValue;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.allOf;
+import static org.hamcrest.Matchers.matchesPattern;
 import static org.hamcrest.collection.IsEmptyCollection.empty;
 import static org.hamcrest.core.AnyOf.anyOf;
 import static org.hamcrest.core.IsInstanceOf.instanceOf;
 import static org.hamcrest.core.IsNull.nullValue;
+import static org.hamcrest.number.OrderingComparison.greaterThan;
+import static org.hamcrest.text.IsEmptyString.emptyOrNullString;
 
 import java.util.List;
 import java.util.stream.Stream;
@@ -44,11 +47,15 @@ public class GetApplicationsAPIParameterizedTest extends BaseTest {
   @MethodSource("provideApplications")
   void testApplicationFields(final GetApplicationsResponseData app) {
 
-    assertThat(app.getApplicationid(), notNullValue());
-    assertThat(app.getCitizenid(), notNullValue());
-    assertThat(app.getApplicantid(), notNullValue());
+    assertThat(app.getApplicationid(), greaterThan(0));
+    assertThat(app.getCitizenid(), greaterThan(0));
+    assertThat(app.getApplicantid(), greaterThan(0));
     assertThat(app.getStaffid(), anyOf(nullValue(), instanceOf(Integer.class)));
-    assertThat(app.getDateOfApplication(), not(emptyOrNullString()));
+    assertThat(
+        app.getDateOfApplication(),
+        allOf(
+            not(emptyOrNullString()),
+            matchesPattern("^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}\\.\\d{3}Z$")));
     assertThat(app.getKindOfApplication(), not(emptyOrNullString()));
     assertThat(app.getStatusOfApplication(), not(emptyOrNullString()));
     assertThat(app.getChannel(), not(emptyOrNullString()));

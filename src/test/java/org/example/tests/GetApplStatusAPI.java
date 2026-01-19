@@ -1,9 +1,11 @@
 package org.example.tests;
 
-import static org.hamcrest.CoreMatchers.notNullValue;
-import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.emptyOrNullString;
+import static org.hamcrest.Matchers.allOf;
 import static org.hamcrest.Matchers.not;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.matchesPattern;
+import static org.hamcrest.Matchers.notNullValue;
+import static org.hamcrest.text.IsEmptyString.emptyOrNullString;
 
 import org.example.pojo.GetApplStatusResponse;
 import org.example.pojo.GetApplStatusResponseData;
@@ -31,8 +33,12 @@ public class GetApplStatusAPI extends BaseTest {
     assertThat(response.getData(), notNullValue());
 
     GetApplStatusResponseData app = response.getData();
-    assertThat(app.getDateofapplication(), notNullValue());
-    assertThat(app.getKindofapplication(), notNullValue());
-    assertThat(app.getStatusofapplication(), notNullValue());
+    assertThat(
+        app.getDateofapplication(),
+        allOf(
+            not(emptyOrNullString()),
+            matchesPattern("^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}\\.\\d{3}Z$")));
+    assertThat(app.getKindofapplication(), not(emptyOrNullString()));
+    assertThat(app.getStatusofapplication(), not(emptyOrNullString()));
   }
 }
