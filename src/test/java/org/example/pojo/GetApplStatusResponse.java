@@ -5,6 +5,6 @@ import lombok.Getter;
 @Getter
 public class GetApplStatusResponse {
 
-  private ApplStatusData data;
+  private GetApplStatusResponseData data;
   private String requestId;
 }
