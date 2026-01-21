@@ -1,7 +1,7 @@
 package org.example.tests;
 
-import static org.hamcrest.Matchers.allOf;
 import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.allOf;
 import static org.hamcrest.Matchers.not;
 import static org.hamcrest.Matchers.notNullValue;
 import static org.hamcrest.collection.IsEmptyCollection.empty;
@@ -15,17 +15,18 @@ import static org.hamcrest.text.MatchesPattern.matchesPattern;
 import java.util.Random;
 import org.example.pojo.GetApplicationsResponse;
 import org.example.pojo.GetApplicationsResponseData;
+import org.example.utils.Endpoints;
 import org.example.utils.RequestManager;
 import org.junit.jupiter.api.Test;
 
-public class GetApplicationsAPIForRandomApplication extends BaseTest {
+public class GetApplicationsAPIForRandomApplicationTest extends BaseTest {
 
   @Test
   public void getApplications() {
 
     GetApplicationsResponse response =
         RequestManager.getRequest(
-            REQ_SPEC, RESP_SPEC, "getApplications", GetApplicationsResponse.class);
+            REQ_SPEC, RESP_SPEC, Endpoints.GET_APPLICATIONS, GetApplicationsResponse.class);
 
     assertThat(response, notNullValue());
     assertThat(response.getTotal(), not(emptyOrNullString()));

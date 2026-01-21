@@ -5,10 +5,11 @@ import java.time.ZoneId;
 import net.datafaker.Faker;
 import org.example.pojo.SendAdminRequest;
 import org.example.pojo.SendAdminResponse;
+import org.example.utils.Endpoints;
 import org.example.utils.RequestManager;
 import org.junit.jupiter.api.Test;
 
-public class SendAdminRequestAPI extends BaseTest {
+public class SendAdminRequestAPITest extends BaseTest {
 
   @Test
   public void sendAdminRequestTest() {
@@ -18,22 +19,22 @@ public class SendAdminRequestAPI extends BaseTest {
     LocalDate birthday = birthdayDate.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
     String formatted = birthday.toString();
 
-    SendAdminRequest request = new SendAdminRequest();
-
-    request.setDateofbirth(formatted);
-    request.setPersonalFirstName(faker.name().firstName());
-    request.setPersonalLastName(faker.name().lastName());
-    request.setPersonalMiddleName(faker.name().nameWithMiddle());
-
     String passport = faker.regexify("[A-Z0-9]{6,8}");
-    request.setPersonalNumberOfPassport(passport);
-
     String phone = faker.number().digits(11);
-    request.setPersonalPhoneNumber(phone);
+
+    SendAdminRequest request =
+        SendAdminRequest.builder()
+            .dateofbirth(formatted)
+            .personalFirstName(faker.name().firstName())
+            .personalLastName(faker.name().lastName())
+            .personalMiddleName(faker.name().nameWithMiddle())
+            .personalNumberOfPassport(passport)
+            .personalPhoneNumber(phone)
+            .build();
 
     SendAdminResponse response =
         RequestManager.postRequest(
-            REQ_SPEC, RESP_SPEC, "sendAdminRequest", request, SendAdminResponse.class);
+            REQ_SPEC, RESP_SPEC, Endpoints.SEND_ADMIN_REQUEST, request, SendAdminResponse.class);
     System.out.println("answer" + response);
   }
 }

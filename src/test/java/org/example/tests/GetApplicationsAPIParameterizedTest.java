@@ -1,10 +1,10 @@
 package org.example.tests;
 
-import static org.hamcrest.Matchers.not;
-import static org.hamcrest.Matchers.notNullValue;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.allOf;
 import static org.hamcrest.Matchers.matchesPattern;
+import static org.hamcrest.Matchers.not;
+import static org.hamcrest.Matchers.notNullValue;
 import static org.hamcrest.collection.IsEmptyCollection.empty;
 import static org.hamcrest.core.AnyOf.anyOf;
 import static org.hamcrest.core.IsInstanceOf.instanceOf;
@@ -16,6 +16,7 @@ import java.util.List;
 import java.util.stream.Stream;
 import org.example.pojo.GetApplicationsResponse;
 import org.example.pojo.GetApplicationsResponseData;
+import org.example.utils.Endpoints;
 import org.example.utils.RequestManager;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -30,7 +31,7 @@ public class GetApplicationsAPIParameterizedTest extends BaseTest {
 
     response =
         RequestManager.getRequest(
-            REQ_SPEC, RESP_SPEC, "getApplications", GetApplicationsResponse.class);
+            REQ_SPEC, RESP_SPEC, Endpoints.GET_APPLICATIONS, GetApplicationsResponse.class);
 
     assertThat(response, notNullValue());
     assertThat(response.getTotal(), not(emptyOrNullString()));
