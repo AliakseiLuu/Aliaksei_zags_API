@@ -6,7 +6,7 @@ import lombok.Getter;
 
 @Getter
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class ApplicationData {
+public class GetApplicationsResponseData {
 
   private Integer applicationid;
   private Integer citizenid;
