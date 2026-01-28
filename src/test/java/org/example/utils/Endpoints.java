@@ -3,7 +3,7 @@ package org.example.utils;
 public final class Endpoints {
 
   private Endpoints() {
-    //
+    throw new UnsupportedOperationException("Utility class");
   }
 
   public static final String SEND_USER_REQUEST = "sendUserRequest";
