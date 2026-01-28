@@ -5,9 +5,15 @@ import lombok.Getter;
 
 @Getter
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class ApplStatusData {
+public class SendRequestProcessData {
 
+  private int applicationid;
+  private int citizenid;
+  private int applicantid;
+  private int staffid;
   private String dateofapplication;
   private String kindofapplication;
   private String statusofapplication;
+  private String channel;
+  private String image;
 }

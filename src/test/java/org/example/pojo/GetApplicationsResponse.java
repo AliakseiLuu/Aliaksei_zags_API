@@ -4,9 +4,9 @@ import java.util.List;
 import lombok.Getter;
 
 @Getter
-public class GetApplicationResponse {
+public class GetApplicationsResponse {
 
   private String total;
-  private List<ApplicationData> data;
+  private List<GetApplicationsResponseData> data;
   private String requestId;
 }
