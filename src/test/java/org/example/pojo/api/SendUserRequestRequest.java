@@ -1,5 +1,6 @@
-package org.example.pojo;
+package org.example.pojo.api;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Builder;
 import lombok.Data;
 
@@ -11,12 +12,25 @@ public class SendUserRequestRequest {
   private String anotherPersonLastName;
   private String anotherPersonMiddleName;
   private String anotherPersonPassport;
+
+  @JsonProperty("birth_father")
   private String birthFather;
+
+  @JsonProperty("birth_grandma")
   private String birthGrandma;
+
+  @JsonProperty("birth_grandpa")
   private String birthGrandpa;
+
+  @JsonProperty("birth_mother")
   private String birthMother;
+
+  @JsonProperty("birth_of_anotoherPerson")
   private String birthOfAnotoherPerson;
+
+  @JsonProperty("birth_place")
   private String birthPlace;
+
   private String citizenAddress;
   private String citizenBirthDate;
   private String citizenFirstName;
@@ -25,8 +39,13 @@ public class SendUserRequestRequest {
   private String citizenMiddleName;
   private String citizenNumberOfPassport;
   private String dateOfMarriage;
+
+  @JsonProperty("death_dateOfDeath")
   private String deathDateOfDeath;
+
+  @JsonProperty("death_placeOfDeath")
   private String deathPlaceOfDeath;
+
   private String mode;
   private String newLastName;
   private String personalAddress;

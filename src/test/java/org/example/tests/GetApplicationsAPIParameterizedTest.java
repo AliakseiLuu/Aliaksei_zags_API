@@ -14,8 +14,8 @@ import static org.hamcrest.text.IsEmptyString.emptyOrNullString;
 
 import java.util.List;
 import java.util.stream.Stream;
-import org.example.pojo.GetApplicationsResponse;
-import org.example.pojo.GetApplicationsResponseData;
+import org.example.pojo.api.GetApplicationsResponse;
+import org.example.pojo.api.GetApplicationsResponseData;
 import org.example.utils.Endpoints;
 import org.example.utils.RequestManager;
 import org.junit.jupiter.api.BeforeAll;

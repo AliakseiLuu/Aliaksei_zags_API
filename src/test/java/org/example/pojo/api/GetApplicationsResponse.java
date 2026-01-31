@@ -1,4 +1,4 @@
-package org.example.pojo;
+package org.example.pojo.api;
 
 import java.util.List;
 import lombok.Getter;

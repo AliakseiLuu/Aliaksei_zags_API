@@ -4,11 +4,13 @@ import java.time.LocalDate;
 import java.time.ZoneId;
 import net.datafaker.Faker;
 import org.assertj.core.api.SoftAssertions;
-import org.example.pojo.SendUserRequestRequest;
-import org.example.pojo.SendUserRequestResponse;
-import org.example.pojo.SendUserRequsetResponseData;
+import org.example.pojo.api.SendUserRequestRequest;
+import org.example.pojo.api.SendUserRequestResponse;
+import org.example.pojo.api.SendUserRequsetResponseData;
+import org.example.pojo.db.Application;
 import org.example.utils.Endpoints;
 import org.example.utils.RequestManager;
+import org.example.utils.db.ApplicationsTable;
 import org.junit.jupiter.api.Test;
 
 public class SendUserRequestTest extends BaseTest {
@@ -28,7 +30,7 @@ public class SendUserRequestTest extends BaseTest {
         SendUserRequestRequest.builder()
             .anotherPersonFirstName(faker.name().firstName())
             .anotherPersonLastName(faker.name().lastName())
-            .anotherPersonMiddleName(faker.name().nameWithMiddle())
+            .anotherPersonMiddleName(faker.name().malefirstName())
             .anotherPersonPassport(passport)
             .birthOfAnotoherPerson(formatted)
             .citizenAddress(faker.address().streetAddress())
@@ -36,7 +38,7 @@ public class SendUserRequestTest extends BaseTest {
             .citizenFirstName(faker.name().firstName())
             .citizenGender(faker.demographic().sex())
             .citizenLastName(faker.name().lastName())
-            .citizenMiddleName(faker.name().nameWithMiddle())
+            .citizenMiddleName(faker.name().femaleFirstName())
             .citizenNumberOfPassport(passport)
             .dateOfMarriage(formatted)
             .mode("wedding")
@@ -44,7 +46,7 @@ public class SendUserRequestTest extends BaseTest {
             .personalAddress(faker.address().streetAddress())
             .personalFirstName(faker.name().firstName())
             .personalLastName(faker.name().lastName())
-            .personalMiddleName(faker.name().nameWithMiddle())
+            .personalMiddleName(faker.funnyName().name())
             .personalNumberOfPassport(passport)
             .personalPhoneNumber(phone)
             .build();
@@ -71,6 +73,19 @@ public class SendUserRequestTest extends BaseTest {
         .assertThat(data.getMerrigecertificateid())
         .as("Marriage certificate ID")
         .isGreaterThan(0);
+    softAssertions.assertAll();
+
+    Integer applicationId = response.getData().getApplicationid();
+    Application dbApplication = ApplicationsTable.getApplicationById(applicationId);
+
+    softAssertions
+        .assertThat(dbApplication.getApplicationid())
+        .as("Created via API application exist in DB")
+        .isEqualTo(applicationId);
+    softAssertions
+        .assertThat(dbApplication.getStatusofapplication())
+        .as("Created via API application has 'under consideration' status")
+        .isEqualTo("under consideration");
     softAssertions.assertAll();
   }
 }

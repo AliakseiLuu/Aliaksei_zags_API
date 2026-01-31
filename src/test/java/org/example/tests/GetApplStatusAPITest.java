@@ -7,9 +7,9 @@ import static org.hamcrest.Matchers.not;
 import static org.hamcrest.Matchers.notNullValue;
 import static org.hamcrest.text.IsEmptyString.emptyOrNullString;
 
-import org.example.pojo.GetApplStatusResponse;
-import org.example.pojo.GetApplStatusResponseData;
-import org.example.pojo.GetApplicationsResponse;
+import org.example.pojo.api.GetApplStatusResponse;
+import org.example.pojo.api.GetApplStatusResponseData;
+import org.example.pojo.api.GetApplicationsResponse;
 import org.example.utils.Endpoints;
 import org.example.utils.RequestManager;
 import org.junit.jupiter.api.Test;
