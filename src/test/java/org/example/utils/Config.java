@@ -19,7 +19,7 @@ public final class Config {
   }
 
   private Config() {
-
+    throw new UnsupportedOperationException("Utility class");
   }
 
   public static String get(final String key) {
