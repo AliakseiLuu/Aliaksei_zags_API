@@ -1,10 +1,16 @@
-package org.example.pojo.db;
+package org.example.pojo.dao.entities;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
-public class Application {
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
+public class Applications {
 
   private Integer applicationid;
   private Integer citizenid;

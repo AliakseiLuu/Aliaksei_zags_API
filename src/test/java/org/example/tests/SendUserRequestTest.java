@@ -1,5 +1,7 @@
 package org.example.tests;
 
+import java.sql.Connection;
+import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import net.datafaker.Faker;
@@ -7,10 +9,12 @@ import org.assertj.core.api.SoftAssertions;
 import org.example.pojo.api.SendUserRequestRequest;
 import org.example.pojo.api.SendUserRequestResponse;
 import org.example.pojo.api.SendUserRequsetResponseData;
-import org.example.pojo.db.Application;
+import org.example.pojo.dao.ApplicationDao;
+import org.example.pojo.dao.entities.Applications;
+import org.example.pojo.dao.impl.ApplicationsDaoImpl;
 import org.example.utils.Endpoints;
 import org.example.utils.RequestManager;
-import org.example.utils.db.ApplicationsTable;
+import org.example.utils.db.ConnectionPool;
 import org.junit.jupiter.api.Test;
 
 public class SendUserRequestTest extends BaseTest {
@@ -76,8 +80,11 @@ public class SendUserRequestTest extends BaseTest {
     softAssertions.assertAll();
 
     Integer applicationId = response.getData().getApplicationid();
-    Application dbApplication = ApplicationsTable.getApplicationById(applicationId);
 
+    // получение данных через JDBC
+    // Application dbApplication = ApplicationsTable.getApplicationById(applicationId);
+
+    /*
     softAssertions
         .assertThat(dbApplication.getApplicationid())
         .as("Created via API application exist in DB")
@@ -86,6 +93,38 @@ public class SendUserRequestTest extends BaseTest {
         .assertThat(dbApplication.getStatusofapplication())
         .as("Created via API application has 'under consideration' status")
         .isEqualTo("under consideration");
+    softAssertions.assertAll();*/
+
+    // получение данных используя DAO и connection pool
+    // === Вместо ApplicationsTable.getApplicationById ===
+    Applications dbApplication;
+    try (Connection conn = ConnectionPool.getConnection()) {
+      ApplicationDao dao = new ApplicationsDaoImpl(conn);
+      dbApplication = dao.findById(applicationId).orElse(null);
+    } catch (SQLException e) {
+      throw new RuntimeException("Failed to fetch application from DB", e);
+    }
+
+    // 1. Запись вообще существует в БД
+    softAssertions
+        .assertThat(dbApplication)
+        .as("Created via API application exists in DB")
+        .isNotNull();
+
+    if (dbApplication != null) {
+      // 2. ID совпадает
+      softAssertions
+          .assertThat(dbApplication.getApplicationid())
+          .as("Application ID in DB matches response")
+          .isEqualTo(applicationId);
+
+      // 3. Статус корректный
+      softAssertions
+          .assertThat(dbApplication.getStatusofapplication())
+          .as("Created via API application has 'under consideration' status")
+          .isEqualTo("under consideration");
+    }
+
     softAssertions.assertAll();
   }
 }

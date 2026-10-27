@@ -1,16 +1,17 @@
-package org.example.utils;
+package org.example.utils.db;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import org.example.utils.Config;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class JdbcConnection {
+public class JdbcConnectionDONTUseInDAO {
   private static final String DBURL = Config.get("DBurl");
   private static final String USER = Config.get("dbLogin");
   private static final String PASSWORD = Config.get("dbPassword");
-  private static final Logger LOG = LoggerFactory.getLogger(JdbcConnection.class);
+  private static final Logger LOG = LoggerFactory.getLogger(JdbcConnectionDONTUseInDAO.class);
 
   private static Connection con = null;
 

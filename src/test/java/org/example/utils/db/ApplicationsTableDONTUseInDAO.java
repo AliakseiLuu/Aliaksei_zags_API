@@ -4,25 +4,24 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import org.example.pojo.db.Application;
-import org.example.utils.JdbcConnection;
+import org.example.pojo.dao.entities.Applications;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class ApplicationsTable {
-  private static final Logger LOG = LoggerFactory.getLogger(ApplicationsTable.class);
+public class ApplicationsTableDONTUseInDAO {
+  private static final Logger LOG = LoggerFactory.getLogger(ApplicationsTableDONTUseInDAO.class);
 
-  public static Application getApplicationById(final Integer applicationId) {
+  public static Applications getApplicationById(final Integer applicationId) {
     String query = "SELECT * FROM reg_office.applications WHERE applicationid = ?";
-    Application application = null;
+    Applications application = null;
 
-    try (Connection con = JdbcConnection.connectToDB();
-        PreparedStatement pstmt = con.prepareStatement(query)) {
+    try (Connection con = JdbcConnectionDONTUseInDAO.connectToDB();
+         PreparedStatement pstmt = con.prepareStatement(query)) {
 
       pstmt.setInt(1, applicationId);
       try (ResultSet rs = pstmt.executeQuery()) {
         if (rs.next()) {
-          application = new Application();
+          application = new Applications();
           application.setApplicantid(rs.getInt("applicantid"));
           application.setApplicationid(rs.getInt("applicationid"));
           application.setChannel(rs.getString("channel"));

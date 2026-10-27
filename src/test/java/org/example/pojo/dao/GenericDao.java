@@ -1,0 +1,16 @@
+package org.example.pojo.dao;
+
+import java.util.List;
+import java.util.Optional;
+
+public interface GenericDao<T, ID> {
+  Optional<T> findById(ID id);
+
+  List<T> findAll();
+
+  T save(T t);
+
+  T update(T t, String[] params);
+
+  void deleteById(ID id);
+}
