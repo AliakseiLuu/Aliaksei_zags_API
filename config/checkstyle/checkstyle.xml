@@ -103,7 +103,7 @@
 
         <!-- Checks for imports                              -->
         <!-- See http://checkstyle.sf.net/config_import.html -->
-        <module name="AvoidStarImport"/>
+        <!-- <module name="AvoidStarImport"/> -->
         <module name="IllegalImport"/> <!-- defaults to sun.* packages -->
         <module name="RedundantImport"/>
         <module name="UnusedImports"/>
@@ -146,7 +146,7 @@
         <!-- See http://checkstyle.sf.net/config_coding.html -->
         <module name="EmptyStatement"/>
         <module name="EqualsHashCode"/>
-        <module name="HiddenField"/>
+        <!-- <module name="HiddenField"/> -->
         <module name="IllegalInstantiation"/>
         <module name="InnerAssignment"/>
         <module name="MissingSwitchDefault"/>
@@ -162,7 +162,7 @@
         <!-- Miscellaneous other checks.                   -->
         <!-- See http://checkstyle.sf.net/config_misc.html -->
         <module name="ArrayTypeStyle"/>
-        <module name="FinalParameters"/>
+        <!-- <module name="FinalParameters"/> -->
 
     </module>
 

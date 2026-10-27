@@ -1,4 +1,4 @@
-package org.example.pojo;
+package org.example.pojo.api;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -6,7 +6,7 @@ import lombok.Getter;
 
 @Getter
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class ApplicationData {
+public class GetApplicationsResponseData {
 
   private Integer applicationid;
   private Integer citizenid;
